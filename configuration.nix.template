@@ -14,7 +14,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      $IMPORT_NIX # ligne gérée par script. D'origine : inexistant.
+      $IMPORT_MACHINE_NIX # ligne gérée par script. D'origine : inexistant.
       $IMPORT_IMPERMANENCE # ligne gérée par script. D'origine : inexistant.
       $IMPORT_STATELESS # ligne gérée par script. D'origine : inexistant.
     ];
@@ -33,7 +33,7 @@
     bypassWorkqueues = true;
   };
 
-  networking.hostName = $TARGET_HOSTNAME; # Define your hostname.
+  networking.hostName = "$TARGET_HOSTNAME"; # Define your hostname.
 
   # Enable networking
   networking.networkmanager.enable = true;

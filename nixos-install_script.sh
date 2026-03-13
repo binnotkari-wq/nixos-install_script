@@ -350,13 +350,13 @@ definir_variables_origine() {
 }
 
 definir_imports_nix_impermanence() {
-    IMPORT_IMPERMANENCE="./modules/OS-functions_impermanence.nix"
-    IMPORT_STATELESS="# ./modules/OS-optimizations_stateless.nix" # Commenté
+    IMPORT_IMPERMANENCE="/home/$TARGET_USER/Mes-Donnees/Git/nixos-dotfiles/modules/OS-functions_impermanence.nix"
+    IMPORT_STATELESS="# /home/$TARGET_USER/Mes-Donnees/Git/nixos-dotfiles/modules/OS-optimizations_stateless.nix"
 }
 
 definir_imports_nix_stateless() {
-    IMPORT_IMPERMANENCE="# ./modules/OS-functions_impermanence.nix"
-    IMPORT_STATELESS="./modules/OS-optimizations_stateless.nix" # Commenté
+    IMPORT_IMPERMANENCE="# /home/$TARGET_USER/Mes-Donnees/Git/nixos-dotfiles/modules/OS-functions_impermanence.nix"
+    IMPORT_STATELESS="/home/$TARGET_USER/Mes-Donnees/Git/nixos-dotfiles/modules/OS-optimizations_stateless.nix"
 }
 
 generer_configuration_nix() {
