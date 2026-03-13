@@ -123,12 +123,18 @@ echo "installation terminée, on peut redémarrer. Les partitions sont montées 
 # =============================================================================
 
 initialiser_variable_par_defaut() {
-DISK_NAME=""
-SCENARIO="INIT"
-CUSTOMISATION_NIXOS="non"
-IMPERMANENCE="non"
-TARGET_HOSTNAME="vm"
-TARGET_USER="benoit"
+    DISK_NAME=""
+    SCENARIO="INIT"
+    CUSTOMISATION_NIXOS="non"
+    IMPERMANENCE="non"
+    TARGET_HOSTNAME="vm"
+    TARGET_USER="benoit"
+    USER_HASH=""
+    LUKS_UUID=""
+    PART_BOOT=""
+    PART_LUKS=""
+    IMPORT_MACHINE_NIX=""
+    FIREFOX=""
 }
 
 choisir_disque() {
@@ -392,8 +398,9 @@ traiter_permissions() {
 
 attendre_confirmation() { 
     local r=""  # On l'initialise à vide pour satisfaire set -u
+    local message="${1:-Confirmation requise}"
     until [ "$r" = "oui" ]; do 
-        read -rp "$1 (oui) : " r
+        read -rp "$message (oui) : " r
     done
 }
 
