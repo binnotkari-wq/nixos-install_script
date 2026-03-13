@@ -390,7 +390,21 @@ traiter_permissions() {
 # FONCTIONS UTILITAIRES
 # =============================================================================
 
-attendre_confirmation() { local r; until [ "$r" = "oui" ]; do read -rp "$1 (oui) : " r; done; }
+attendre_confirmation() { 
+    local r=""  # On l'initialise à vide pour satisfaire set -u
+    until [ "$r" = "oui" ]; do 
+        read -rp "$1 (oui) : " r
+    done
+}
+
+
+choisir_customisation() {
+    until [[ "$CUSTOMISATION_NIXOS" == "oui" || "$CUSTOMISATION_NIXOS" == "non" ]]; do
+        echo "  Attention, la personnalisation de Nixos est un prérequis à l'impermanence."
+        read -rp "Customisation Nixos? (oui/non) : " CUSTOMISATION_NIXOS
+    done
+}
+
 
 unifier_chemins_partitions() {
     if [[ $DISK_NAME == *"nvme"* || $DISK_NAME == *"mmcblk"* ]]; then
