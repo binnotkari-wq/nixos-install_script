@@ -124,11 +124,11 @@ echo "installation terminée, on peut redémarrer. Les partitions sont montées 
 
 initialiser_variable_par_defaut() {
     DISK_NAME=""
-    SCENARIO="INIT"
-    CUSTOMISATION_NIXOS="non"
-    IMPERMANENCE="non"
-    TARGET_HOSTNAME="vm"
-    TARGET_USER="benoit"
+    SCENARIO=""
+    CUSTOMISATION_NIXOS=""
+    IMPERMANENCE=""
+    TARGET_HOSTNAME=""
+    TARGET_USER=""
     USER_HASH=""
     LUKS_UUID=""
     PART_BOOT=""
@@ -363,7 +363,8 @@ generer_configuration_nix() {
     LUKS_UUID=$(blkid -s UUID -o value "$PART_LUKS")
     # On exporte les variables pour qu'elles soient visibles par envsubst. Puis envsubst va remplacer le contenu de la cible, pr le contenu de la source dont les variables auront été interprétées.
     export TARGET_USER TARGET_HOSTNAME FIREFOX IMPORT_MACHINE_NIX IMPORT_IMPERMANENCE IMPORT_STATELESS LUKS_UUID
-    envsubst '$TARGET_USER,$TARGET_HOSTNAME,$FIREFOX,$IMPORT_MACHINE_NIX,$IMPORT_IMPERMANENCE,$IMPORT_STATELESS,$LUKS_UUID' < "./configuration.nix.template" > "/mnt/etc/nixos/configuration.nix"
+    nix-shell -p gettext --run "envsubst '\$TARGET_USER,\$TARGET_HOSTNAME,\$FIREFOX,\$IMPORT_MACHINE_NIX,\$IMPORT_IMPERMANENCE,\$IMPORT_STATELESS,\$LUKS_UUID' < ./configuration.nix.template > /mnt/etc/nixos/configuration.nix"
+    
 }
 
 
