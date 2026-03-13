@@ -14,7 +14,7 @@
 clear
 echo "Script déploiement NixOS. Paramétrage - partionnement - installation - setup utilisateur"
 
-# --- 1. VARIABLES ---
+# --- 1 VARIABLES ---
 echo ""
 echo "Quel disque ? :"
 lsblk -dn -o NAME,SIZE,MODEL | grep -v "loop"
@@ -53,7 +53,7 @@ if [ "$CONFIRM" != "oui" ]; then
     exit 0
 fi
 
-# --- 2. PARTITIONNEMENT ---
+# --- 2 PARTITIONNEMENT ---
 
 # Simplification des chemins des périphériques
 PART_BTRFS="/dev/mapper/cryptroot"
@@ -123,7 +123,7 @@ mkdir -p /mnt/persist/var/lib/flatpak
 echo "Préparation disque terminée."
 
 
-# --- 3. INSTALLATION ---
+# --- 3 INSTALLATION ---
 
 echo "Téléchargement du repo des .nix custom"
 git clone https://github.com/binnotkari-wq/nixos-dotfiles.git /mnt/home/$TARGET_USER/Mes-Donnees/Git/nixos-dotfiles # git créé lui-même le dossier cible
@@ -240,7 +240,7 @@ echo "Lancement installation"
 nixos-install --no-root-passwd --root /mnt
 
 
-# --- 4. FINALISATION SETUP UTILISATEUR ---
+# --- 4 FINALISATION SETUP UTILISATEUR ---
 
 echo "Injection du mot de passe..."
 echo "$TARGET_USER:$USER_HASH" | chroot /mnt /run/current-system/sw/bin/chpasswd -e
